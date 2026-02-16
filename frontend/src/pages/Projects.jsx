@@ -41,13 +41,13 @@ export default function Projects() {
       link: "https://chatji.vercel.app/"
     },
     {
-      title: "Portfolio Generator",
-      category: "Developer Tool",
+      title: "Portfolio",
+      category: "Web application",
       description:
-        "Dynamic portfolio builder with drag-and-drop interface, customizable themes, and one-click deployment capabilities.",
-      tech: ["React", "Vite", "CSS Modules", "Netlify"],
+        "A portfolio crafted with react js and gsap which is updated with time",
+      tech: ["React", "Vite", "Tailwind css", "Vercel"],
       year: "2023",
-      link: "https://github.com/yourusername/portfolio-generator"
+      link: "https://arka-pal.vercel.app/"
     },
     {
       title: "Weather Analytics Dashboard",
