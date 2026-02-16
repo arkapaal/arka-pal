@@ -26,6 +26,151 @@ const Card = ({ children }) => (
   </div>
 );
 
+// Animated SVG Background Component
+const AnimatedSVGBackground = () => (
+  <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+    <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+      {/* Animated circles */}
+      <circle cx="10%" cy="20%" r="2" fill="#a3e635" opacity="0.6">
+        <animate attributeName="r" values="2;4;2" dur="4s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.6;1;0.6" dur="4s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="90%" cy="30%" r="3" fill="#22c55e" opacity="0.5">
+        <animate attributeName="r" values="3;6;3" dur="5s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.5;1;0.5" dur="5s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="30%" cy="70%" r="2.5" fill="#a3e635" opacity="0.7">
+        <animate attributeName="r" values="2.5;5;2.5" dur="6s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.7;1;0.7" dur="6s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="70%" cy="80%" r="2" fill="#22c55e" opacity="0.6">
+        <animate attributeName="r" values="2;4.5;2" dur="5.5s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.6;1;0.6" dur="5.5s" repeatCount="indefinite" />
+      </circle>
+      
+      {/* Animated lines */}
+      <line x1="0%" y1="50%" x2="100%" y2="50%" stroke="#a3e635" strokeWidth="0.5" opacity="0.3">
+        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="3s" repeatCount="indefinite" />
+        <animate attributeName="y1" values="50%;48%;50%" dur="3s" repeatCount="indefinite" />
+        <animate attributeName="y2" values="50%;48%;50%" dur="3s" repeatCount="indefinite" />
+      </line>
+      <line x1="50%" y1="0%" x2="50%" y2="100%" stroke="#22c55e" strokeWidth="0.5" opacity="0.2">
+        <animate attributeName="opacity" values="0.2;0.5;0.2" dur="4s" repeatCount="indefinite" />
+      </line>
+    </svg>
+  </div>
+);
+
+// Floating SVG Icons
+const FloatingSVGIcon = ({ delay = 0, x = "20%", y = "30%" }) => (
+  <svg className="absolute" style={{ left: x, top: y }} width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 5 L25 15 L35 15 L27 22 L30 32 L20 25 L10 32 L13 22 L5 15 L15 15 Z" fill="none" stroke="#a3e635" strokeWidth="1.5" opacity="0.4">
+      <animateTransform 
+        attributeName="transform" 
+        type="rotate" 
+        from="0 20 20" 
+        to="360 20 20" 
+        dur="20s" 
+        begin={`${delay}s`}
+        repeatCount="indefinite" 
+      />
+      <animate attributeName="opacity" values="0.4;0.8;0.4" dur="3s" begin={`${delay}s`} repeatCount="indefinite" />
+    </path>
+  </svg>
+);
+
+// Code Brackets Animation
+const CodeBracketsAnimation = () => (
+  <svg className="absolute right-10 top-20" width="60" height="80" viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
+    <path d="M 20 10 L 10 10 L 10 40 L 20 40" stroke="#a3e635" strokeWidth="2" fill="none" opacity="0.5">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite" />
+    </path>
+    <path d="M 40 10 L 50 10 L 50 40 L 40 40" stroke="#a3e635" strokeWidth="2" fill="none" opacity="0.5">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" begin="0.5s" repeatCount="indefinite" />
+    </path>
+    <path d="M 20 50 L 10 50 L 10 70 L 20 70" stroke="#22c55e" strokeWidth="2" fill="none" opacity="0.5">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" begin="1s" repeatCount="indefinite" />
+    </path>
+    <path d="M 40 50 L 50 50 L 50 70 L 40 70" stroke="#22c55e" strokeWidth="2" fill="none" opacity="0.5">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" begin="1.5s" repeatCount="indefinite" />
+    </path>
+  </svg>
+);
+
+// Geometric Pattern
+const GeometricPattern = () => (
+  <svg className="absolute left-10 bottom-20 opacity-30" width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="50,10 90,90 10,90" fill="none" stroke="#a3e635" strokeWidth="1">
+      <animateTransform 
+        attributeName="transform" 
+        type="rotate" 
+        from="0 50 50" 
+        to="360 50 50" 
+        dur="15s" 
+        repeatCount="indefinite" 
+      />
+    </polygon>
+    <circle cx="50" cy="50" r="30" fill="none" stroke="#22c55e" strokeWidth="1">
+      <animate attributeName="r" values="30;35;30" dur="3s" repeatCount="indefinite" />
+    </circle>
+    <rect x="35" y="35" width="30" height="30" fill="none" stroke="#a3e635" strokeWidth="1">
+      <animateTransform 
+        attributeName="transform" 
+        type="rotate" 
+        from="0 50 50" 
+        to="-360 50 50" 
+        dur="12s" 
+        repeatCount="indefinite" 
+      />
+    </rect>
+  </svg>
+);
+
+// Grid Pattern with Animation
+const AnimatedGridPattern = () => (
+  <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-10">
+    <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+          <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#a3e635" strokeWidth="0.5" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid)">
+        <animate attributeName="opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite" />
+      </rect>
+    </svg>
+  </div>
+);
+
+// Particle Dots
+const ParticleDots = () => (
+  <svg className="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+    {[...Array(15)].map((_, i) => (
+      <circle 
+        key={i}
+        cx={`${Math.random() * 100}%`} 
+        cy={`${Math.random() * 100}%`} 
+        r="1" 
+        fill="#a3e635" 
+        opacity="0.3"
+      >
+        <animate 
+          attributeName="cy" 
+          values={`${Math.random() * 100}%;${Math.random() * 100}%`}
+          dur={`${8 + Math.random() * 4}s`} 
+          repeatCount="indefinite" 
+        />
+        <animate 
+          attributeName="opacity" 
+          values="0.3;0.8;0.3" 
+          dur={`${2 + Math.random() * 2}s`} 
+          repeatCount="indefinite" 
+        />
+      </circle>
+    ))}
+  </svg>
+);
+
 export default function Home() {
   const horizontalRef = useRef(null);
   const horizontalSectionRef = useRef(null);
@@ -275,8 +420,16 @@ export default function Home() {
 
   return (
     <>
-      <section id="home" className="min-h-screen flex items-center bg-black pt-24">
-        <div className="max-w-6xl mx-auto px-6 py-32">
+      <section id="home" className="min-h-screen flex items-center bg-black pt-24 relative overflow-hidden">
+        {/* SVG Animations */}
+        <AnimatedSVGBackground />
+        <FloatingSVGIcon delay={0} x="15%" y="20%" />
+        <FloatingSVGIcon delay={2} x="85%" y="70%" />
+        <CodeBracketsAnimation />
+        <GeometricPattern />
+        <ParticleDots />
+        
+        <div className="max-w-6xl mx-auto px-6 py-32 relative z-10">
           <div className="grid md:grid-cols-2 gap-16 items-center" style={{ perspective: 1000 }}>
             <motion.div variants={heroTextVariants} initial="hidden" animate="visible" style={{ transformStyle: "preserve-3d" }}>
               <motion.h1 className="text-5xl md:text-6xl font-heading font-bold text-white leading-tight mb-6" initial={{ opacity: 0, y: -30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
@@ -317,9 +470,15 @@ export default function Home() {
       </section>
 
       <section ref={horizontalSectionRef} className="relative h-screen overflow-hidden bg-gradient-to-r from-black to-[#0a0a0a]">
+        {/* Animated Grid Pattern for horizontal section */}
+        <AnimatedGridPattern />
+        
         <div ref={horizontalRef} className="flex h-full items-center" style={{ width: "300vw" }}>
           {/* Panel 1 - Title */}
-          <div className="w-screen h-full flex items-center justify-center px-6">
+          <div className="w-screen h-full flex items-center justify-center px-6 relative">
+            <FloatingSVGIcon delay={1} x="30%" y="25%" />
+            <FloatingSVGIcon delay={3} x="70%" y="65%" />
+            
             <motion.div ref={whatIDoRef} variants={whatIDoTitleVariants} initial="hidden" animate={isWhatIDoInView ? "visible" : "hidden"} style={{ transformStyle: "preserve-3d" }} className="text-center">
               <SectionTitle>What I Do</SectionTitle>
               <SectionDivider />
