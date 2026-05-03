@@ -9,12 +9,14 @@ import Skills from "./pages/Skills";
 import Projects from "./pages/Projects";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import SpotifyNowPlaying from "./components/SpotifyNowPlaying";
 
 export default function App() {
   return (
     <Router>
       <SmoothScroll>
         <CustomCursor />
+        <SpotifyNowPlaying />
         <div className="min-h-screen bg-black">  {/* Changed from bg-white */}
           <Navigation />
           <Routes>
@@ -27,6 +29,7 @@ export default function App() {
           <Contact />
           <Footer />
         </div>
+        
       </SmoothScroll>
     </Router>
   );
