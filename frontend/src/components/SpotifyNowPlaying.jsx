@@ -9,7 +9,7 @@ export default function SpotifyNowPlaying() {
   useEffect(() => {
     const fetchNowPlaying = async () => {
       try {
-        const res = await fetch("/api/spotify");
+        const res = await fetch("https://spotifybackend-pe09.onrender.com/api/spotify");
         const data = await res.json();
         if (data?.isPlaying) {
           setTrack(data);
@@ -33,7 +33,7 @@ export default function SpotifyNowPlaying() {
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
             <Music className="text-green-400" size={18} />
-            <h2 className="text-sm font-semibold tracking-wide">Now Playing{track ? `: ${track.title}` : ""}</h2>
+            <h2 className="text-sm font-semibold tracking-wide">Now Playing</h2>
           </div>
 
           <div className="flex items-center gap-2">
