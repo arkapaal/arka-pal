@@ -483,7 +483,7 @@ export default function Home() {
               <SectionTitle>What I Do</SectionTitle>
               <SectionDivider />
               <p className="text-xl text-gray-400 mt-6">
-                Scroll to explore my expertise →
+                Scroll to explore my projects 
               </p>
             </motion.div>
           </div>

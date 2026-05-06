@@ -15,18 +15,17 @@ async function getAccessToken() {
   const REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN;
   const basic = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString("base64");
 
-
-  // const response = await fetch(TOKEN_ENDPOINT, {
-  //   method: "POST",
-  //   headers: {
-  //     Authorization: `Basic ${basic}`,
-  //     "Content-Type": "application/x-www-form-urlencoded",
-  //   },
-  //   body: new URLSearchParams({
-  //     grant_type: "refresh_token",
-  //     refresh_token: REFRESH_TOKEN,
-  //   }),
-  // });
+  const response = await fetch(TOKEN_ENDPOINT, {
+    method: "POST",
+    headers: {
+      Authorization: `Basic ${basic}`,
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams({
+      grant_type: "refresh_token",
+      refresh_token: REFRESH_TOKEN,
+    }),
+  });
 
   return response.json();
 }
