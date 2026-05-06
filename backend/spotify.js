@@ -48,11 +48,11 @@ router.get("/", async (req, res) => {
         return res.json({ isPlaying: false });
     }
 
-    // if (response.status >= 400) {
-    // const errorData = await response.json();
-    // console.log("Spotify error:", errorData); 
-    // return res.json({ isPlaying: false });
-    // }
+    if (response.status >= 400) {
+    const errorData = await response.json();
+    console.log("Spotify error:", errorData); 
+    return res.json({ isPlaying: false });
+    }
 
     const song = await response.json();
     return res.json({
