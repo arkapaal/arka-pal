@@ -15,30 +15,26 @@ async function getAccessToken() {
   const REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN;
   const basic = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString("base64");
 
-  console.log("CLIENT_ID:", CLIENT_ID);         // add this
-  console.log("REFRESH_TOKEN:", REFRESH_TOKEN); // add this
 
-  const response = await fetch(TOKEN_ENDPOINT, {
-    method: "POST",
-    headers: {
-      Authorization: `Basic ${basic}`,
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: new URLSearchParams({
-      grant_type: "refresh_token",
-      refresh_token: REFRESH_TOKEN,
-    }),
-  });
+  // const response = await fetch(TOKEN_ENDPOINT, {
+  //   method: "POST",
+  //   headers: {
+  //     Authorization: `Basic ${basic}`,
+  //     "Content-Type": "application/x-www-form-urlencoded",
+  //   },
+  //   body: new URLSearchParams({
+  //     grant_type: "refresh_token",
+  //     refresh_token: REFRESH_TOKEN,
+  //   }),
+  // });
 
   return response.json();
 }
-
+//async awaits 
 router.get("/", async (req, res) => {
   try {
     const tokenData = await getAccessToken();
-    console.log("Token response:", tokenData); // add this
-    
-    const { access_token } = tokenData;
+    const {access_token} = tokenData;
     console.log("Access token:", access_token);
 
     const response = await fetch(NOW_PLAYING_ENDPOINT, {
@@ -47,30 +43,30 @@ router.get("/", async (req, res) => {
       },
     });
 
-    console.log("Spotify status:", response.status);
+    // console.log("Spotify status:", response.status);
 
     if (response.status === 204) {
         return res.json({ isPlaying: false });
     }
 
-    if (response.status >= 400) {
-    const errorData = await response.json();
-    console.log("Spotify error:", errorData); // add this
-    return res.json({ isPlaying: false });
-    }
+    // if (response.status >= 400) {
+    // const errorData = await response.json();
+    // console.log("Spotify error:", errorData); 
+    // return res.json({ isPlaying: false });
+    // }
 
     const song = await response.json();
     return res.json({
       isPlaying: song.is_playing,
       title: song.item.name,
-      artist: song.item.artists.map((a) => a.name).join(", "),
+      artist: song.item.artists.map((a) => a.name).join(","),
       albumImageUrl: song.item.album.images[0].url,
       songUrl: song.item.external_urls.spotify,
     });
   } catch (error) {
     console.error("Error:", error);
-    res.status(500).json({ error: "Spotify fetch failed" });
-  }
+    res.status(500).json({ error: "Spotify fetch failed"});
+  } 
 });
 
 export default router;

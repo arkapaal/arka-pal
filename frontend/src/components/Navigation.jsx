@@ -37,12 +37,11 @@ export default function Navigation() {
     <nav className="fixed top-0 w-full bg-black/90 backdrop-blur-sm border-b border-white/10 z-50">
       <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
         <button onClick={() => scrollToSection("home")} className="text-xl font-heading font-bold cursor-pointer text-white hover:text-[#a3e635] transition-colors">
-    
         </button>
         <div className="flex gap-8 items-center" >
           {navLinks.map((link) =>
             link.isResume ? (
-              <a key={link.id} href="/Resume-Arka Pal.pdf" download className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#a3e635] transition border border-white/10 px-3 py-1.5 rounded-md hover:border-[#a3e635]/30" >
+              <a key={link.id} href="/Resume_Arka_Pal.pdf" download className="flex items-center gap-2 text-sm text-gray-400 hover:text-[#a3e635] transition border border-white/10 px-3 py-1.5 rounded-md hover:border-[#a3e635]/30" >
                 <Download size={16} />
                 {link.label}
               </a>
