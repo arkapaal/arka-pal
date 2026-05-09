@@ -26,7 +26,7 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Inter'],
         heading: ['Space Grotesk', 'sans-serif'],
       },
       borderColor: theme => ({

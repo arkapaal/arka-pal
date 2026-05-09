@@ -6,12 +6,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const SectionTitle = ({ children }) => (
-  <h2 className="text-4xl font-heading font-bold text-center mb-8 text-white">{children}</h2>
-);
+// ─── UI Components ────────────────────────────────────────────────────────────
 
-const SectionDivider = () => (
-  <div className="w-20 h-1 bg-[#a3e635] mx-auto mb-6"></div>
+const Card = ({ children }) => (
+  <div className="p-6 bg-[#0a0a0a] border border-white/10 rounded-lg shadow-sm hover:shadow-lg hover:shadow-[#a3e635]/5 hover:border-[#a3e635]/30 transition-all">
+    {children}
+  </div>
 );
 
 const Button = ({ children, variant = "primary" }) => (
@@ -20,177 +20,148 @@ const Button = ({ children, variant = "primary" }) => (
   </button>
 );
 
-const Card = ({ children }) => (
-  <div className="p-6 bg-[#0a0a0a] border border-white/10 rounded-lg shadow-sm hover:shadow-lg hover:shadow-[#a3e635]/5 hover:border-[#a3e635]/30 transition-all">
-    {children}
+// ─── Projects Data ────────────────────────────────────────────────────────────
+
+const projects = [
+  {
+    number: "01",
+    title: "Hastas.ai",
+    category: "AI Application",
+    description: "An SIH problem statement based web-app that detects mudras using computer vision and machine learning models trained on hand gesture datasets.",
+    longDesc: "Built during Smart India Hackathon, this app uses a Flask backend with a trained ML model to detect Indian classical dance hand gestures (mudras) in real-time via webcam.",
+    tech: ["React", "Node.js", "Flask", "Python", "TensorFlow", "OpenCV"],
+    year: "2024",
+    link: "https://hastas-ai-a4zo.vercel.app/",
+    tag: "Hackathon Project",
+  },
+  {
+    number: "02",
+    title: "Chatji",
+    category: "Chat Application",
+    description: "An anonymous real-time chat application that hides your identity — no sign-up, no history, just pure anonymous conversation.",
+    longDesc: "Chatji uses Socket.io for real-time bidirectional communication. Users get assigned a random identity on join. All messages are ephemeral — closing the tab wipes everything.",
+    tech: ["Next.js", "Socket.io", "Tailwind CSS", "Node.js", "Express"],
+    year: "2023",
+    link: "https://chatji.vercel.app/",
+    tag: "Real-time App",
+  },
+  {
+    number: "03",
+    title: "Portfolio",
+    category: "Web Application",
+    description: "A portfolio crafted with React JS and GSAP featuring smooth scroll animations, horizontal sections and a Spotify now-playing widget.",
+    longDesc: "This very portfolio — built to showcase creativity as much as code. Uses GSAP ScrollTrigger for horizontal scroll sections and Framer Motion for component animations.",
+    tech: ["React", "Vite", "Tailwind CSS", "GSAP", "Framer Motion", "Express"],
+    year: "2023",
+    link: "https://arka-pal.vercel.app/",
+    tag: "Personal Project",
+  },
+];
+
+// ─── Project Panel ────────────────────────────────────────────────────────────
+
+const ProjectPanel = ({ project }) => (
+  <div className="w-screen h-full flex items-center justify-center px-16 relative flex-shrink-0">
+    <span className="absolute right-16 top-1/2 -translate-y-1/2 text-[220px] font-black text-white/[0.03] select-none leading-none pointer-events-none">
+      {project.number}
+    </span>
+
+    <div className="w-full max-w-6xl grid grid-cols-2 gap-16 items-center">
+
+      {/* Left — text */}
+      <div>
+        <div className="flex items-center gap-3 mb-6">
+          <span className="text-xs uppercase tracking-[0.3em] text-[#a3e635] font-semibold">{project.tag}</span>
+          <span className="w-8 h-px bg-[#a3e635]/40" />
+          <span className="text-xs text-gray-500">{project.year}</span>
+        </div>
+
+        <h2 className="text-6xl text-white mb-3 leading-none">
+          {project.title}
+        </h2>
+
+        <p className="text-sm uppercase tracking-widest text-gray-500 mb-6">{project.category}</p>
+
+        <p className="text-xl text-gray-300 leading-relaxed mb-4">
+          {project.description}
+        </p>
+
+        <p className="text-sm text-gray-500 leading-relaxed mb-8">
+          {project.longDesc}
+        </p>
+
+        <motion.a
+          href={project.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.97 }}
+          className="inline-flex items-center gap-3 px-7 py-3 bg-[#a3e635] text-black font-bold rounded-xl hover:bg-[#22c55e] transition-colors duration-300"
+        >
+          <span>View Project</span>
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </motion.a>
+      </div>
+
+      {/* Right — decorative card + tech stack */}
+      <div className="flex flex-col gap-6">
+        <div className="relative p-8 bg-[#0a0a0a] border border-white/10 rounded-2xl overflow-hidden">
+          <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#a3e635]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-[#22c55e]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="relative z-10">
+            <div className="text-6xl mb-6">{project.emoji}</div>
+            <div className="w-full h-px bg-white/5 mb-6" />
+            <div className="space-y-2 font-mono text-xs">
+              <div className="flex gap-2">
+                <span className="text-[#a3e635]">const</span>
+                <span className="text-white">project</span>
+                <span className="text-gray-500">=</span>
+                <span className="text-[#22c55e]">"{project.title}"</span>
+              </div>
+              <div className="flex gap-2">
+                <span className="text-[#a3e635]">const</span>
+                <span className="text-white">year</span>
+                <span className="text-gray-500">=</span>
+                <span className="text-[#22c55e]">"{project.year}"</span>
+              </div>
+              <div className="flex gap-2">
+                <span className="text-[#a3e635]">const</span>
+                <span className="text-white">status</span>
+                <span className="text-gray-500">=</span>
+                <span className="text-[#22c55e]">"deployed ✓"</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="p-6 bg-[#0a0a0a] border border-white/10 rounded-2xl">
+          <p className="text-xs uppercase tracking-widest text-gray-500 mb-4">Tech Stack</p>
+          <div className="flex flex-wrap gap-2">
+            {project.tech.map((t) => (
+              <span key={t} className="px-3 py-1.5 bg-black border border-[#a3e635]/20 text-[#a3e635] text-xs font-semibold rounded-full hover:border-[#a3e635]/60 transition-colors">
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 );
 
-// Animated SVG Background Component
-const AnimatedSVGBackground = () => (
-  <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-    <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-      {/* Animated circles */}
-      <circle cx="10%" cy="20%" r="2" fill="#a3e635" opacity="0.6">
-        <animate attributeName="r" values="2;4;2" dur="4s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0.6;1;0.6" dur="4s" repeatCount="indefinite" />
-      </circle>
-      <circle cx="90%" cy="30%" r="3" fill="#22c55e" opacity="0.5">
-        <animate attributeName="r" values="3;6;3" dur="5s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0.5;1;0.5" dur="5s" repeatCount="indefinite" />
-      </circle>
-      <circle cx="30%" cy="70%" r="2.5" fill="#a3e635" opacity="0.7">
-        <animate attributeName="r" values="2.5;5;2.5" dur="6s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0.7;1;0.7" dur="6s" repeatCount="indefinite" />
-      </circle>
-      <circle cx="70%" cy="80%" r="2" fill="#22c55e" opacity="0.6">
-        <animate attributeName="r" values="2;4.5;2" dur="5.5s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="0.6;1;0.6" dur="5.5s" repeatCount="indefinite" />
-      </circle>
-      
-      {/* Animated lines */}
-      <line x1="0%" y1="50%" x2="100%" y2="50%" stroke="#a3e635" strokeWidth="0.5" opacity="0.3">
-        <animate attributeName="opacity" values="0.3;0.6;0.3" dur="3s" repeatCount="indefinite" />
-        <animate attributeName="y1" values="50%;48%;50%" dur="3s" repeatCount="indefinite" />
-        <animate attributeName="y2" values="50%;48%;50%" dur="3s" repeatCount="indefinite" />
-      </line>
-      <line x1="50%" y1="0%" x2="50%" y2="100%" stroke="#22c55e" strokeWidth="0.5" opacity="0.2">
-        <animate attributeName="opacity" values="0.2;0.5;0.2" dur="4s" repeatCount="indefinite" />
-      </line>
-    </svg>
-  </div>
-);
-
-// Floating SVG Icons
-const FloatingSVGIcon = ({ delay = 0, x = "20%", y = "30%" }) => (
-  <svg className="absolute" style={{ left: x, top: y }} width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-    <path d="M20 5 L25 15 L35 15 L27 22 L30 32 L20 25 L10 32 L13 22 L5 15 L15 15 Z" fill="none" stroke="#a3e635" strokeWidth="1.5" opacity="0.4">
-      <animateTransform 
-        attributeName="transform" 
-        type="rotate" 
-        from="0 20 20" 
-        to="360 20 20" 
-        dur="20s" 
-        begin={`${delay}s`}
-        repeatCount="indefinite" 
-      />
-      <animate attributeName="opacity" values="0.4;0.8;0.4" dur="3s" begin={`${delay}s`} repeatCount="indefinite" />
-    </path>
-  </svg>
-);
-
-// Code Brackets Animation
-const CodeBracketsAnimation = () => (
-  <svg className="absolute right-10 top-20" width="60" height="80" viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
-    <path d="M 20 10 L 10 10 L 10 40 L 20 40" stroke="#a3e635" strokeWidth="2" fill="none" opacity="0.5">
-      <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite" />
-    </path>
-    <path d="M 40 10 L 50 10 L 50 40 L 40 40" stroke="#a3e635" strokeWidth="2" fill="none" opacity="0.5">
-      <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" begin="0.5s" repeatCount="indefinite" />
-    </path>
-    <path d="M 20 50 L 10 50 L 10 70 L 20 70" stroke="#22c55e" strokeWidth="2" fill="none" opacity="0.5">
-      <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" begin="1s" repeatCount="indefinite" />
-    </path>
-    <path d="M 40 50 L 50 50 L 50 70 L 40 70" stroke="#22c55e" strokeWidth="2" fill="none" opacity="0.5">
-      <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" begin="1.5s" repeatCount="indefinite" />
-    </path>
-  </svg>
-);
-
-// Geometric Pattern
-const GeometricPattern = () => (
-  <svg className="absolute left-10 bottom-20 opacity-30" width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="50,10 90,90 10,90" fill="none" stroke="#a3e635" strokeWidth="1">
-      <animateTransform 
-        attributeName="transform" 
-        type="rotate" 
-        from="0 50 50" 
-        to="360 50 50" 
-        dur="15s" 
-        repeatCount="indefinite" 
-      />
-    </polygon>
-    <circle cx="50" cy="50" r="30" fill="none" stroke="#22c55e" strokeWidth="1">
-      <animate attributeName="r" values="30;35;30" dur="3s" repeatCount="indefinite" />
-    </circle>
-    <rect x="35" y="35" width="30" height="30" fill="none" stroke="#a3e635" strokeWidth="1">
-      <animateTransform 
-        attributeName="transform" 
-        type="rotate" 
-        from="0 50 50" 
-        to="-360 50 50" 
-        dur="12s" 
-        repeatCount="indefinite" 
-      />
-    </rect>
-  </svg>
-);
-
-// Grid Pattern with Animation
-const AnimatedGridPattern = () => (
-  <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-10">
-    <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-          <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#a3e635" strokeWidth="0.5" />
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#grid)">
-        <animate attributeName="opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite" />
-      </rect>
-    </svg>
-  </div>
-);
-
-// Particle Dots
-const ParticleDots = () => (
-  <svg className="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-    {[...Array(15)].map((_, i) => (
-      <circle 
-        key={i}
-        cx={`${Math.random() * 100}%`} 
-        cy={`${Math.random() * 100}%`} 
-        r="1" 
-        fill="#a3e635" 
-        opacity="0.3"
-      >
-        <animate 
-          attributeName="cy" 
-          values={`${Math.random() * 100}%;${Math.random() * 100}%`}
-          dur={`${8 + Math.random() * 4}s`} 
-          repeatCount="indefinite" 
-        />
-        <animate 
-          attributeName="opacity" 
-          values="0.3;0.8;0.3" 
-          dur={`${2 + Math.random() * 2}s`} 
-          repeatCount="indefinite" 
-        />
-      </circle>
-    ))}
-  </svg>
-);
+// ─── Main Export ──────────────────────────────────────────────────────────────
 
 export default function Home() {
-  const horizontalRef = useRef(null);
   const horizontalSectionRef = useRef(null);
+  const horizontalRef = useRef(null);
   const whatIDoRef = useRef(null);
   const isWhatIDoInView = useInView(whatIDoRef, { once: true, margin: "-100px" });
-  
-  // Refs for card stack animations - Web Dev
-  const webDevCard1Ref = useRef(null);
-  const webDevCard2Ref = useRef(null);
-  const webDevCard3Ref = useRef(null);
-  
-  // Refs for card stack animations - UI/UX
-  const uiuxCard1Ref = useRef(null);
-  const uiuxCard2Ref = useRef(null);
-  const uiuxCard3Ref = useRef(null);
 
   useEffect(() => {
     const section = horizontalSectionRef.current;
     const wrapper = horizontalRef.current;
-
     if (!section || !wrapper) return;
 
     const scrollWidth = wrapper.scrollWidth - window.innerWidth;
@@ -207,246 +178,58 @@ export default function Home() {
       },
     });
 
-    tl.to(wrapper, {
-      x: -scrollWidth,
-      ease: "none",
-    });
+    tl.to(wrapper, { x: -scrollWidth, ease: "none" });
 
-    // Web Development Cards - Pop out from center
-    if (webDevCard1Ref.current && webDevCard2Ref.current && webDevCard3Ref.current) {
-      // Card 1 - pops to top-left
-      gsap.fromTo(
-        webDevCard1Ref.current,
-        { 
-          x: 0,
-          y: 0,
-          scale: 0,
-          rotation: 0,
-          opacity: 0,
-          zIndex: 1,
-        },
-        {
-          x: -150,
-          y: -120,
-          scale: 1,
-          rotation: -15,
-          opacity: 1,
-          zIndex: 1,
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: () => `+=${scrollWidth * 0.35}`,
-            scrub: 1,
-          },
-        }
-      );
-
-      // Card 2 - pops to top-right
-      gsap.fromTo(
-        webDevCard2Ref.current,
-        { 
-          x: 0,
-          y: 0,
-          scale: 0,
-          rotation: 0,
-          opacity: 0,
-          zIndex: 2,
-        },
-        {
-          x: 150,
-          y: -100,
-          scale: 1,
-          rotation: 15,
-          opacity: 1,
-          zIndex: 2,
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: () => `+=${scrollWidth * 0.4}`,
-            scrub: 1,
-          },
-        }
-      );
-
-      // Card 3 - pops to bottom
-      gsap.fromTo(
-        webDevCard3Ref.current,
-        { 
-          x: 0,
-          y: 0,
-          scale: 0,
-          rotation: 0,
-          opacity: 0,
-          zIndex: 3,
-        },
-        {
-          x: 0,
-          y: 140,
-          scale: 1,
-          rotation: 5,
-          opacity: 1,
-          zIndex: 3,
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: () => `+=${scrollWidth * 0.45}`,
-            scrub: 1,
-          },
-        }
-      );
-    }
-
-    // UI/UX Cards - Pop out from center
-    if (uiuxCard1Ref.current && uiuxCard2Ref.current && uiuxCard3Ref.current) {
-      // Card 1 - pops to left
-      gsap.fromTo(
-        uiuxCard1Ref.current,
-        { 
-          x: 0,
-          y: 0,
-          scale: 0,
-          rotation: 0,
-          opacity: 0,
-          zIndex: 1,
-        },
-        {
-          x: -160,
-          y: -80,
-          scale: 1,
-          rotation: -20,
-          opacity: 1,
-          zIndex: 1,
-          scrollTrigger: {
-            trigger: section,
-            start: () => `+=${scrollWidth * 0.5}`,
-            end: () => `+=${scrollWidth * 0.85}`,
-            scrub: 1,
-          },
-        }
-      );
-
-      // Card 2 - pops to right
-      gsap.fromTo(
-        uiuxCard2Ref.current,
-        { 
-          x: 0,
-          y: 0,
-          scale: 0,
-          rotation: 0,
-          opacity: 0,
-          zIndex: 2,
-        },
-        {
-          x: 160,
-          y: -60,
-          scale: 1,
-          rotation: 20,
-          opacity: 1,
-          zIndex: 2,
-          scrollTrigger: {
-            trigger: section,
-            start: () => `+=${scrollWidth * 0.55}`,
-            end: () => `+=${scrollWidth * 0.9}`,
-            scrub: 1,
-          },
-        }
-      );
-
-      // Card 3 - pops to bottom center
-      gsap.fromTo(
-        uiuxCard3Ref.current,
-        { 
-          x: 0,
-          y: 0,
-          scale: 0,
-          rotation: 0,
-          opacity: 0,
-          zIndex: 3,
-        },
-        {
-          x: 0,
-          y: 150,
-          scale: 1,
-          rotation: -5,
-          opacity: 1,
-          zIndex: 3,
-          scrollTrigger: {
-            trigger: section,
-            start: () => `+=${scrollWidth * 0.6}`,
-            end: () => `+=${scrollWidth * 0.95}`,
-            scrub: 1,
-          },
-        }
-      );
-    }
-
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
+    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
   }, []);
 
   const heroTextVariants = {
     hidden: { opacity: 0, x: -100, rotateY: -30 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      rotateY: 0,
-      transition: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] },
-    },
-  };
-
-  const buttonContainerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.5 },
-    },
-  };
-
-  const buttonVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    visible: { opacity: 1, x: 0, rotateY: 0, transition: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] } },
   };
 
   const whatIDoTitleVariants = {
     hidden: { opacity: 0, y: -50, rotateX: -45 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      rotateX: 0,
-      transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] },
-    },
+    visible: { opacity: 1, y: 0, rotateX: 0, transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] } },
   };
 
   return (
     <>
+      {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section id="home" className="min-h-screen flex items-center bg-black pt-24 relative overflow-hidden">
-        {/* SVG Animations */}
-        <AnimatedSVGBackground />
-        <FloatingSVGIcon delay={0} x="15%" y="20%" />
-        <FloatingSVGIcon delay={2} x="85%" y="70%" />
-        <CodeBracketsAnimation />
-        <GeometricPattern />
-        <ParticleDots />
-        
         <div className="max-w-6xl mx-auto px-6 py-32 relative z-10">
           <div className="grid md:grid-cols-2 gap-16 items-center" style={{ perspective: 1000 }}>
+
             <motion.div variants={heroTextVariants} initial="hidden" animate="visible" style={{ transformStyle: "preserve-3d" }}>
-              <motion.h1 className="text-5xl md:text-6xl font-heading font-bold text-white leading-tight mb-6" initial={{ opacity: 0, y: -30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
+              
+              <motion.h1
+                className="text-5xl md:text-6xl font-heading  text-white leading-tight mb-6"
+                initial={{ opacity: 0, y: -30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
+              >
                 Hi, I'm <span className="text-[#a3e635]">Arka</span>
               </motion.h1>
-
-              <motion.p className="text-xl text-gray-400 mb-8 leading-relaxed" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.4 }}>
+              <motion.p
+                className="text-xl text-gray-400 mb-8 leading-relaxed"
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.4 }}
+              >
                 A passionate Full Stack Developer building modern web applications with React, Node.js and databases.
               </motion.p>
-
-              <motion.div className="flex space-x-4" variants={buttonContainerVariants} initial="hidden" animate="visible">
-                <motion.div variants={buttonVariants} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button>View Projects</Button>
-                </motion.div>
-                <motion.div variants={buttonVariants} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button variant="secondary">Contact Me</Button>
-                </motion.div>
+              <motion.div
+                className="flex space-x-4"
+                initial="hidden" animate="visible"
+                variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.2, delayChildren: 0.5 } } }}
+              >
+                {[{ label: "View Projects" }, { label: "Contact Me", sectionId: "contact", variant: "secondary" }].map(({ label, sectionId, variant }) => (
+                  <motion.div
+                    key={label}
+                    variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}
+                    whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                  >
+                    <Button onClick={() => {scrollToSection(sectionId)}} variant={variant}>
+                      {label}
+                    </Button>
+                  </motion.div>
+                ))}
               </motion.div>
             </motion.div>
 
@@ -457,7 +240,12 @@ export default function Home() {
                 { title: "Database", content: "MySQL, MongoDB, PostgreSQL" },
                 { title: "Tools", content: "Git, GitHub, VS Code, Docker" },
               ].map((card, index) => (
-                <motion.div key={index} initial={{ opacity: 0, scale: 0.8, y: 50 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.6 + index * 0.15 }} whileHover={{ scale: 1.05, transition: { duration: 0.3 } }} style={{ transformStyle: "preserve-3d" }}>
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.8, y: 50 }} animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.6 + index * 0.15 }}
+                  whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
+                >
                   <Card>
                     <h3 className="text-xl font-heading font-semibold mb-2 text-white">{card.title}</h3>
                     <p className="text-gray-400 text-sm">{card.content}</p>
@@ -465,157 +253,53 @@ export default function Home() {
                 </motion.div>
               ))}
             </motion.div>
+
           </div>
         </div>
       </section>
 
-      <section ref={horizontalSectionRef} className="relative h-screen overflow-hidden bg-gradient-to-r from-black to-[#0a0a0a]">
-        {/* Animated Grid Pattern for horizontal section */}
-        <AnimatedGridPattern />
-        
-        <div ref={horizontalRef} className="flex h-full items-center" style={{ width: "300vw" }}>
-          {/* Panel 1 - Title */}
-          <div className="w-screen h-full flex items-center justify-center px-6 relative">
-            <FloatingSVGIcon delay={1} x="30%" y="25%" />
-            <FloatingSVGIcon delay={3} x="70%" y="65%" />
-            
-            <motion.div ref={whatIDoRef} variants={whatIDoTitleVariants} initial="hidden" animate={isWhatIDoInView ? "visible" : "hidden"} style={{ transformStyle: "preserve-3d" }} className="text-center">
-              <SectionTitle>What I Do</SectionTitle>
-              <SectionDivider />
-              <p className="text-xl text-gray-400 mt-6">
-                Scroll to explore my projects 
+      {/* ── Horizontal Scroll: Featured Projects ─────────────────────────── */}
+      <section ref={horizontalSectionRef} className="relative h-screen overflow-hidden bg-black">
+        <div
+          ref={horizontalRef}
+          className="flex h-full items-center"
+          style={{ width: `${(projects.length ) * 100}vw` }}
+        >
+          {/* Panel 1 — Title */}
+          <div className="w-screen h-full flex items-center justify-center px-6 relative flex-shrink-0">
+            <motion.div
+              ref={whatIDoRef}
+              variants={whatIDoTitleVariants}
+              initial="hidden"
+              animate={isWhatIDoInView ? "visible" : "hidden"}
+              className="text-center"
+            >
+              <p className="text-xs uppercase tracking-[0.4em] text-[#a3e635] mb-4 font-semibold">Portfolio</p>
+              <h2 className="text-6xl md:text-7xl text-white leading-tight mb-4">
+                Featured<br /><span className="text-[#a3e635]">Projects</span>
+              </h2>
+              <div className="w-20 h-1 bg-[#a3e635] mx-auto mb-6" />
+              <p className="text-xl text-gray-400 max-w-md mx-auto mb-8">
+                A collection of work that showcases my skills in development and design.
               </p>
+              <motion.div
+                className="flex items-center justify-center gap-2 text-gray-500 text-sm"
+                animate={{ x: [0, 10, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <span>Scroll to explore</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </motion.div>
             </motion.div>
           </div>
 
-          {/* Panel 2 - Web Development with card stack */}
-          <div className="w-screen h-full flex items-center justify-center px-20 relative" style={{ perspective: "1500px" }}>
-            {/* Center point for cards to pop from */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              {/* Card 1 - Code Editor */}
-              <div 
-                ref={webDevCard1Ref}
-                className="absolute w-64 h-80 bg-gradient-to-br from-[#0a0a0a] to-[#1a1a1a] rounded-2xl border-2 border-[#a3e635]/40 shadow-2xl shadow-[#a3e635]/20 backdrop-blur-sm p-6 flex flex-col justify-between"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <div className="text-6xl mb-4">💻</div>
-                <div>
-                  <h4 className="text-xl font-heading font-bold text-[#a3e635] mb-2">Frontend</h4>
-                  <p className="text-sm text-gray-400">Building responsive UIs with React & Tailwind</p>
-                </div>
-              </div>
+          {/* Panels — One project each */}
+          {projects.map((project) => (
+            <ProjectPanel key={project.number} project={project} />
+          ))}
 
-              {/* Card 2 - Server */}
-              <div 
-                ref={webDevCard2Ref}
-                className="absolute w-64 h-80 bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] rounded-2xl border-2 border-[#22c55e]/40 shadow-2xl shadow-[#22c55e]/20 backdrop-blur-sm p-6 flex flex-col justify-between"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <div className="text-6xl mb-4">⚡</div>
-                <div>
-                  <h4 className="text-xl font-heading font-bold text-[#22c55e] mb-2">Backend</h4>
-                  <p className="text-sm text-gray-400">Scalable APIs with Node.js & Express</p>
-                </div>
-              </div>
-
-              {/* Card 3 - Database */}
-              <div 
-                ref={webDevCard3Ref}
-                className="absolute w-64 h-80 bg-gradient-to-br from-[#0a0a0a] to-black rounded-2xl border-2 border-[#a3e635]/60 shadow-2xl shadow-[#a3e635]/30 backdrop-blur-sm p-6 flex flex-col justify-between"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <div className="text-6xl mb-4">🗄️</div>
-                <div>
-                  <h4 className="text-xl font-heading font-bold text-[#a3e635] mb-2">Database</h4>
-                  <p className="text-sm text-gray-400">MongoDB, PostgreSQL & Redis</p>
-                </div>
-              </div>
-            </div>
-
-            <motion.div className="max-w-2xl relative z-10" whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}>
-              <Card>
-                <div className="p-8">
-                  <h3 className="text-4xl font-heading font-bold mb-6 text-[#a3e635]">
-                    Web Development
-                  </h3>
-                  <p className="text-xl text-gray-400 leading-relaxed mb-6">
-                    Building fast, responsive and scalable web applications using modern frameworks and best practices.
-                  </p>
-                  <div className="flex flex-wrap gap-3">
-                    {['React', 'Vite', 'Node.js', 'Express', 'Tailwind'].map((tech) => (
-                      <span key={tech} className="px-4 py-2 bg-black border border-[#a3e635]/30 text-[#a3e635] rounded-full text-sm font-semibold">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </Card>
-            </motion.div>
-          </div>
-
-          {/* Panel 3 - UI/UX Design with card stack */}
-          <div className="w-screen h-full flex items-center justify-center px-20 relative" style={{ perspective: "1500px" }}>
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              {/* Card 1 - Design Tools */}
-              <div 
-                ref={uiuxCard1Ref}
-                className="absolute w-64 h-80 bg-gradient-to-br from-[#0a0a0a] to-[#1a1a1a] rounded-2xl border-2 border-[#a3e635]/40 shadow-2xl shadow-[#a3e635]/20 backdrop-blur-sm p-6 flex flex-col justify-between"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <div className="text-6xl mb-4">🎨</div>
-                <div>
-                  <h4 className="text-xl font-heading font-bold text-[#a3e635] mb-2">Design Tools</h4>
-                  <p className="text-sm text-gray-400">Figma, Adobe XD & Sketch</p>
-                </div>
-              </div>
-
-              {/* Card 2 - User Research */}
-              <div 
-                ref={uiuxCard2Ref}
-                className="absolute w-64 h-80 bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] rounded-2xl border-2 border-[#22c55e]/40 shadow-2xl shadow-[#22c55e]/20 backdrop-blur-sm p-6 flex flex-col justify-between"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <div className="text-6xl mb-4">🔍</div>
-                <div>
-                  <h4 className="text-xl font-heading font-bold text-[#22c55e] mb-2">User Research</h4>
-                  <p className="text-sm text-gray-400">Understanding user needs & behavior</p>
-                </div>
-              </div>
-
-              {/* Card 3 - Prototyping */}
-              <div 
-                ref={uiuxCard3Ref}
-                className="absolute w-64 h-80 bg-gradient-to-br from-[#0a0a0a] to-black rounded-2xl border-2 border-[#a3e635]/60 shadow-2xl shadow-[#a3e635]/30 backdrop-blur-sm p-6 flex flex-col justify-between"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <div className="text-6xl mb-4">✨</div>
-                <div>
-                  <h4 className="text-xl font-heading font-bold text-[#a3e635] mb-2">Prototyping</h4>
-                  <p className="text-sm text-gray-400">Interactive wireframes & mockups</p>
-                </div>
-              </div>
-            </div>
-
-            <motion.div className="max-w-2xl relative z-10" whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}>
-              <Card>
-                <div className="p-8">
-                  <h3 className="text-4xl font-heading font-bold mb-6 text-[#a3e635]">
-                    UI / UX Design
-                  </h3>
-                  <p className="text-xl text-gray-400 leading-relaxed mb-6">
-                    Designing clean and user-friendly interfaces with focus on usability and performance.
-                  </p>
-                  <div className="flex flex-wrap gap-3">
-                    {['Figma', 'Responsive Design', 'Accessibility', 'User Research'].map((skill) => (
-                      <span key={skill} className="px-4 py-2 bg-black border border-[#a3e635]/30 text-[#a3e635] rounded-full text-sm font-semibold">
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </Card>
-            </motion.div>
-          </div>
         </div>
       </section>
     </>

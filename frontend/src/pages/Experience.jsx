@@ -77,7 +77,7 @@ export default function Experience() {
 
   return (
     <section id="experience" className="min-h-screen flex items-center bg-black pt-24" ref={ref}>
-      <div className="max-w-6xl mx-auto px-6 py-32">
+      <div className="max-w-6xl mx-auto font-inter px-6 py-32">
         <motion.div variants={titleVariants} initial="hidden" animate={isInView ? "visible" : "hidden"} style={{ transformStyle: "preserve-3d", perspective: 1000 }}>
           <SectionTitle>Experience</SectionTitle>
           <SectionDivider />

@@ -6,7 +6,9 @@ import CustomCursor from "./components/CustomCursor";
 import Home from "./pages/Home";
 import Experience from "./pages/Experience";
 import Skills from "./pages/Skills";
-import Projects from "./pages/Projects";
+// import Projects from "./pages/Projects";
+import LeetcodeHeatmap from "./components/LeetcodeHeatmap";
+
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import SpotifyNowPlaying from "./components/SpotifyNowPlaying";
@@ -15,6 +17,7 @@ export default function App() {
   return (
     <Router>
       <SmoothScroll>
+        {/* <LeetcodeHeatmap /> */}
         <CustomCursor />
         <SpotifyNowPlaying />
         <div className="min-h-screen bg-black">  {/* Changed from bg-white */}
@@ -24,7 +27,7 @@ export default function App() {
           </Routes>
           <Experience />
           <Skills />
-          <Projects />
+          {/* <Projects /> */}
           <About />
           <Contact />
           <Footer />
